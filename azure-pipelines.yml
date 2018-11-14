@@ -2,7 +2,9 @@ trigger:
   branches:
     include:
     - master
-    - ^.*-maintenance$
+    - 1.0-maintenance
+    - 0.12-maintenance
+# TODO: figure out if we can prefix with wildcards like *.*-maintenance$    
 jobs:
 - job: 'Windows'
   pool:
