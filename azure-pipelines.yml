@@ -1,0 +1,31 @@
+jobs:
+
+- job: 'Windows'
+  pool:
+    vmImage: 'vs2017-win2016'
+  trigger:
+    branches:
+      include:
+      - master
+      - ^.*-maintenance$
+  strategy:
+    matrix:
+      Python27:
+        PYTHON_VERSION: '2.7'
+        TOXENV: py,codecov
+      Python36:
+        PYTHON_VERSION: '3.6'
+        TOXENV: py,codecov
+
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(PYTHON_VERSION)'
+      architecture: 'x64'
+    displayName: 'Install Python'
+
+  - script: python -m pip install -U tox
+    displayName: 'Install tox'
+
+  - script: python -m tox
+    displayName: 'Test script'
