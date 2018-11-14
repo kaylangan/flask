@@ -1,13 +1,12 @@
+trigger:
+  branches:
+    include:
+    - master
+    - ^.*-maintenance$
 jobs:
-
 - job: 'Windows'
   pool:
     vmImage: 'vs2017-win2016'
-  trigger:
-    branches:
-      include:
-      - master
-      - ^.*-maintenance$
   strategy:
     matrix:
       Python27:
